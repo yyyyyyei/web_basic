@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display</title>
+    <!-- 내부 스타일 시트 -->
+     <style>
+        /* 선택자 {스타일 속성: 값; 스타일 속성: 값;} */
+        /* 스타일에서의 속성(property) */
+        /* display: 보여지는 속성 */
+        .block {
+            background-color: aqua;
+            display: block;
+            /* display: block; */
+            /* display: none; */
+            padding: 1rem;
+            margin: 1rem;
+            width: 240px;
+            height: 240px;
+        }
+        .inline {
+            /* 글자 컨텐츠 취급  -> 줄 높이만 중요 */
+            background-color: aquamarine;
+            display: inline;
+            padding: 1rem; /* X */
+            margin: 1rem; /* 왼쪽, 오른쪽만 적용 */
+            width: 240px; /* 사이즈 관련된 건 무시 */
+            height: 240px; /* 사이즈 관련된 건 무시 */
+        }
+        .inline-block {
+            /* 글자 컨텐츠 취급  -> 줄 높이만 중요 */
+            background-color: lightcoral;
+            display: inline-block;
+            padding: 1rem; /* X */
+            margin: 1rem; /* 왼쪽, 오른쪽만 적용 */
+            width: 240px; /* 사이즈 관련된 건 무시 */
+            height: 240px; /* 사이즈 관련된 건 무시 */
+        }
+     </style>
+</head>
+<body>
+    <div>
+        <h2>display</h2>
+        <!-- 태그명 속성(attribute)명 -->
+        <!-- attribute 속성: 내가 내 맘대로 key value 값을 지정하는 경우. 그냥 내가 작성하여 데이터를 담음 -->
+        <!-- property 속성: 이미 정의된 속성을 내가 불러서 쓰는 것 -->
+        <!-- blcok vs inline -->
+        <div class="block">block 요소</div>
+        <span class="inline">inline 요소 (span)</span>
+        <div class="block">block 요소</div>
+        <span class="inline">inline 요소 (span)</span>
+        <span class="inline">옆에 붙음</span>
+
+        <div>
+            <span class="inline-block">inline-block</span>
+            <span class="inline-block">inline-block</span>
+        </div>
+    </div>
+</body>
+</html>
