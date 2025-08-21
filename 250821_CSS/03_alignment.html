@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alignment</title>
+    <style>
+        .text-center {
+            /* block 요소는 영향을 안받음!!! */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 정렬: sorting vs alignment -->
+    <!-- sorting: 데이터와 해당 데이터가 배열, 출력 단위에서
+     어떻게 배취될 것인가 (오름차순, 내림차순) -->
+    <!-- alignment: 화면 요소들이 어떤 기준과 어떤 축(axis)으로 나열될 것인가(왼쪽 정렬, 가운데 정렬, 오른쪽 정렬, 양쪽 정렬...) -->
+     <section>
+        <section>
+            <h2>텍스트 정렬</h2>
+            <!-- 가로 정렬 -->
+            <div class="text-center">
+                기본적으로 inline 텍스트들은 왼쪽 정렬. css 통해 정렬해줘야함
+                <br/>
+                <div style="
+                    background-color: lightcoral;
+                    text-align: right;
+                    display: inline-block;
+                    width: 300px;">
+                    inlineblock(요소가 영향받은 게 아닌.. 텍스트상속당한 것)
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>마진 정렬</h2>
+            <!-- 왼쪽과 오른쪽에 동일한 여백두어서 가운데 정렬 -->
+            <div style="width: 100px; height: 100px;
+            background-color: aquamarine; margin: auto; text-align: center;">
+            <!-- margin auto: 왼쪽과 오른쪽이 자동으로 멀어지게 만드면서 중앙에 배치
+                              왼쪽과 오른쪽은 충돌이 인식되는데 위아래는 충돌이 없음
+                              (확장될 수 있는 영역으로 인식) -->
+            마진마진
+            </div>
+        </section>
+
+        <section>
+            <h2>뷰포트 활용</h2>
+            <div style="display: flex; justify-content: center;
+            align-items: first; background-color: aquamarine;
+            width: 100vw; height: 50vh;">
+            <!-- 가로는 100퍼, 세로는 50퍼 영역 차지 -->
+                <img
+                    style="width: 500px; height: 240;"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8FNOsRDsPJ2Eny4KCaLijhHm9mQ2iXN5vHw&s"
+                />
+            </div>
+        </section>
+     </section>
+</body>
+</html>
