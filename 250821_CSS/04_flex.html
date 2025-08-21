@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex</title>
+    <style>
+        .flex-container {
+            background-color: yellow;
+            display: flex; /* 감싸주는 상위의 요소가 flex하면 하위 요소도 영향을 받음 */
+            /* inline처럼 가로로 쌓임 */
+            /* 주축(main axis) -> 가로축, 교차축(cross axis) -> 세로축 */
+            /* 주축 정렬: justify-content */
+            justify-content: center;
+            /* 기본: 왼쪽 정렬 */
+            /* justify-content: start; */
+            /* 오른쪽 정렬 */
+            /* justify-content: end; */
+            height: 160px;
+            /* 교차축 정렬 */
+            /* 빈 영역을 다 채움 */
+            /* align-items: stretch; */
+            align-items: center;
+        }
+
+        .justify-content-space-between {
+            justify-content: space-between;
+            /* 축을 기준으로 아이템들 사이에 고르게 여백 분포
+                -> 모든 걸 고르게 양 끝쪽으로 두고 중간은 고르게 분포 */
+            background-color: lightblue;
+        }
+
+        .justify-content-space-around {
+            justify-content: space-around;
+            /* between과 유사하나 전체적으로 왼쪽, 오른쪽 양쪽에 평균적인
+                마진 길이의 50%씩 배치 */
+            background-color: lightgrey;
+        }
+
+        .justify-content-space-evenly {
+            justify-content: space-evenly;
+            /* around와 유사하나, 마진들의 크기가 모두 유사함 */
+            background-color: lightgoldenrodyellow;
+        }
+
+        .flex-item {  
+            background-color: blueviolet;
+            width: 100px;
+            aspect-ratio: 1; /* 가로/세로 비율*/
+            /* 띄어져이쓴 느낌 -> padding, border, margin */
+            /* padding -> 어차피 색깔도 가져가서 띈 느낌 안듦.. */
+            /* border -> 딱히 안띄어져보임 */
+            /* margin -> margin  병합이 일어남 ㅠ */
+            border: 3px solid red;
+            margin: 0.5rem;
+        }
+
+        /* 교차축 정렬 */
+        .align-items-start {
+            align-items: start;
+            background-color: lightblue;
+        }
+
+        .align-items-end {
+            align-items: end;
+            background-color: lightgray;
+        }
+
+        .flex-direction-col {
+            /* flex-direction : row; */
+            flex-direction: column;
+            background-color: lightgoldenrodyellow;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h2>Flex(Flexbox)</h2>
+    <!-- 메인축 정렬 -->
+    <h3>가로 정렬</h3>
+    <section class="flex-container">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+    </section>
+    <section class="flex-container justify-content-space-between">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+    </section>
+    <section class="flex-container justify-content-space-around">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+    </section>
+    <section class="flex-container justify-content-space-evenly">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+    </section>
+
+    <br/>
+    <br/>
+    <br/>
+
+    <!-- 교차축 정렬 -->
+    <h3>세로 정렬 </h3>
+    <section class="flex-container">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+    </section>
+    <section class="flex-container align-items-start">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+    </section>
+    <section class="flex-container align-items-end">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+    </section>
+
+
+    <br/>
+    <br/>
+    <br/>
+
+    <h3>축 교체</h3>
+    <section class="flex-container flex-direction-col">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+    </section>
+
+    <!-- margin의 문제: 병합 -->
+    <!-- solution: 병합되었을 때 기준으로 값 줘버린다면? -->
+    <!-- gap -->
+    <!-- 요소 사이의 거리 -->
+    <!-- margin 대체 -->
+    <h3>갭(gap) </h3>
+    <section class="flex-container" style="gap: 1rem">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+    </section>
+
+    <!-- wrap -->
+    <h3>wrap</h3>
+    <section class="flex-container" style="gap: 2rem; flex-wrap: wrap;
+    overflow:scroll;">
+        <div class="flex-item">1st</div>
+        <div class="flex-item">2nd</div>
+        <div class="flex-item">3rd</div>
+        <div class="flex-item">4st</div>
+        <div class="flex-item">5st</div>
+        <div class="flex-item">6st</div>
+        <div class="flex-item">7st</div>
+        <div class="flex-item">8st</div>
+        <div class="flex-item">9st</div>
+        <div class="flex-item">10st</div>
+        <div class="flex-item">11st</div>
+        <div class="flex-item">12st</div>
+    </section>
+</body>
+</html>
