@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>semantic tag</title>
+    <style>
+        #homepage section {
+            margin: 1rem;
+            padding: 1rem;
+        }
+
+        #homepage nav {
+            border: 1px solid gray;
+            margin: 0;
+            padding: 1rem;
+        }
+
+        #homepage header, section, nav, main, footer, article {
+            background-color: beige;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>semantic tag</h2>    
+        <div>div tag.. divide -> 구역을 나누는 </div>
+        <!-- div(block), span(inline) -->
+        <!-- block은 구역 -> a 구역에 a-1 구역에 a-1-1 구역..(?) -->
+        <div>
+            list
+            <!-- div 지옥 -> 무엇을 위한 div인지 알 수가 없음 -->
+            <!-- form, h, p tag들은 다 의미가 있는데 div는 딱히 없삼 -->
+            <!-- div에 의미를 부여하면 더 편할 것 ! -> semantic tag -->
+            <div style="display: inline-block;">item</div>
+            <div style="display: inline-block;">item</div>
+            <div style="display: inline-block;">item</div>
+        </div>
+        
+        <!-- div와 똑같이 구역을 나타냄 -->
+        <section id="homepage">
+            <!-- 제목 -->
+            <header>반갑습니다. 개발자 페이지입니다~</header>
+            <!-- 네비게이션 바 -->
+            <nav>[홈]   [게시판]    [자료실]    [공지사항]</nav>
+            <main>오늘의 개발 소식
+                <section>
+                    <article>글, 기사</article>
+                    <aside>사이드바</aside>
+                </section>
+            </main>
+            <footer>2024, 김자바 작성</footer>
+        </section>
+    </div>
+</body>
+</html>
