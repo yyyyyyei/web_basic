@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Function</title>
+</head>
+<body>
+    <h2>화살표 함수</h2>
+    <script>
+        // Java의 lambda와 거의 유사
+        // Java는 -> 인데 JS는 =>
+        const multi = (a,b) => a * b;
+        console.log(multi(10, 20));
+
+        // 매개변수가 하나라면 괄호 생략 가능
+        const double = x => x * 3;
+        console.log(double(10));
+
+        // 매개변수가 없는 경우
+        const getRandom = () => Math.random();
+        console.log(getRandom());
+
+        // 중괄호를 사용한 긴 식
+        const sumAndLog = (a, b) => {
+            const result = a + b;
+            console.log(result);
+        }
+        sumAndLog(2, 4);
+    </script>
+</body>
+</html>

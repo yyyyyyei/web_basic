@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flow control</title>
+</head>
+<body>
+    <script>
+        // 조건문에서 사용할 연산자
+        // == (동등)        
+        // === (일치)
+        // ++, -- / +-*/**% 삼항연산자.. 모두 동일
+        // truthy, falsy
+        console.log(1=="1");
+        // true -> 동등연산자에 "타입 변환 기능이 내장!!!"
+        console.log(1==="1");
+        //false -> ===의 경우, 타입 변환 기능 제거
+        // 암튼 그래서 equals로 비교할 필요 없음!!!
+
+        console.log(0, "", [], {});
+        console.log(Boolean(0), Boolean(""), Boolean([]), Boolean({}));
+        // false false true true <- 이건 이유 찾아봐야겠다
+        console.log(`0 == "0"`, 0 == "0", `0 === "0"`, 0 === "0", 
+            `0 == ""`, 0 == "", `"0"== ""`, "0" == ""
+        );
+        // ture, false, true, false
+
+        // HTML에서 존재하는 일반적인 값들은 모두 문자열.
+        // tag에서 값을 끌어오면 문자열은데 언제 다 반환해.. 그래서
+        // 타입 변환 기능이 있는거임??
+
+        // 조건문
+        // if, switch
+        if (1) { // truthy falsy -> falsy하지 않은 건 모두 truthy하다
+
+        }
+
+        let name = prompt("여러분들의 이름은?"); // -> 입력 받을 수 있음!
+        if (name == "변영일") {
+            console.log("변영일 강사님 환영합니다!");
+        } else if (name) {
+            console.log(`${name} 학생 환영합니다!`);
+        } else { // 이름을 입력하지 않았으므로 falsy함
+            console.log("이름을 입력하지 않으셨어요!")
+        }
+
+        // switch
+        // fall through 일어날 수 있으므로 break문 꼭 확인!
+        const input = prompt("사이즈를 입력해 주세요")
+        switch (input) {
+            case "S":
+                console.log("sold out");
+                break;
+            case "M":
+                console.log("sold out");
+                break;
+            case "L":
+                console.log("재고가 있습니다!");
+                break;
+            default:
+                console.log("해당 사이즈는 없습니다!");
+                break;
+        }
+
+    </script>
+</body>
+</html>

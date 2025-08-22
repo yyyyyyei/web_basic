@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iteraion</title>
+</head>
+<body>
+    <script>
+        // 반복문 (for, while, for in, for of)
+        // for (초기식; 조건식; 증감식)
+        for (let i=0; i < 3; i++) {
+            console.log(`for 반복: ${i}`); // 백틱과 쌍따옴표의 차이가 뭘까..
+        }
+
+        // while
+        let count = 0;
+        while (count < 3) {
+            console.log(`while 반복: ${count}`);
+            count++;
+        }
+        // countinue, break도 java때와 같은 역할을 함
+
+        // JS 배열: [] => 파이썬의 list와 유사함. 길이 제한이 따로 없고, 타입이 달라도 됨
+        // 배열 자체를 재정의하는 경우는 없고, 내부를 교체하는 개념
+        // 재정의하는 경우 없으므로 const로 정의
+        // const, [] 대괄호로 선언한다
+        const arr = [];
+        // let: 재할당
+        // 배열은 추가, 삭제, 조회, 수정하는 역할만 수행하므로 아예 새로 할당하지 않음
+        // 따라서 const로 저장하면 메모리상의 이점이 존재함
+
+        // 배열 push
+        arr.push(1);
+        arr.push("이");
+        // arr.push(ture);
+        arr.push("야이야이야");
+        
+        console.log(arr);
+
+
+        // 맨 끝에서 제거할 때 pop
+        console.log(arr.pop());
+
+        
+        // index
+        console.log(arr[0]);
+        console.log(arr[10]); // -> 없는 index로 호출하면 undefined가 나옴!!!
+        
+
+        // &&, || -> 단축연산
+        // Java : Ture, False로 평가하여 그 다음에 단축연산
+        console.log(arr[1] || "기본값"); // 존재하므로 arr[1]인 이 가 나옴
+        console.log(arr[10] || "기본값"); // arr[10]은 존재하지 않음.. 기본값이 나옴
+        // undefined는 falsy한 값이므로 기본값이 선택됨!!
+
+        
+        // 배열 길이
+        // Java -> 배열: .length, 문자열: .length(), 리스트: .size() ..
+        // JS -> length
+        const arr2 = [1, 2, 3, 4, 5];
+        console.log(arr2);
+        // JS에는 clear 기능 없음!..
+        arr2.length = 0; // 있던게 사라짐.. ㄷㄷ
+        console.log(arr2)
+        arr2.length = 10;
+        console.log(arr2); // empty X 10 으로 나오네..
+
+        const arr3 = ["사과", "바나나", "복숭아", "무화과"];
+        // 향상된 for문
+        // Java -> for (타입 v : 배열이나 리스트 lst) {}
+        // JS -> for (타입 v of 리스트 lst) {}
+        // 전체 값 확인
+        for (const v of arr3) {
+            console.log(`for 배열 순회: ${v}`);
+        }
+
+        // for in 문
+        // index가 key니까.. 모두 불러오는 의미
+        for (const index in arr3) {
+            console.log(index, arr3[index]);
+        }
+
+        // 객체
+        const obj = {
+            name: "yejin",
+            job: "programmer"
+        }
+
+        // key 값만 조회
+        for (const key in obj) {
+            console.log(key, obj[key]);
+        }
+        // 정확히는 아까 list의 index는 사실 key라는 의미!
+
+        arr3[4] = "딸기";
+        arr3[4.5] = "배"; // 이게 ㄹㅇ 레전드네
+        arr3["오예"] = "달다";
+        console.log(arr3);
+        // 모자르지만 착한 친구 ..
+
+        // 예외 처리
+        // try catch finally
+        // finally -> return을 하더라도 return을 덮어씌울만큼 강력
+        // 상위가 알아서 처리하도록 하는 throws는 존재하지 않음
+        // catch(e) <- 에러 타입 지정하지 않음. 일단 잡고 원한다면 분류
+        try {
+            console.log(1/0); // infinity.. 얘를 에러로 쳐주지도 않음 ;;
+            JSON.parse("{...}");
+        } catch { // e 에러 객체 없어도 됨!
+            console.error("error!!!")
+        }
+
+        // 에러 메시지 출력해줌!
+        try {
+            JSON.parse("{...}");
+        } catch (e) { // e 에러 객체 없어도 됨!
+            console.error("error message)", e.message);
+            console.error("error type)", typeof e);
+            console.error("error)", e);
+
+            // e 에러가 SyntaxError에 포함됩니까?
+            console.log(e instanceof SyntaxError);
+        }
+
+
+        // throw!
+        try {
+            // Error!
+            throw new Error("에러를 낋여왔습니다");
+        } catch (err) {
+            console.log(err.message);
+        }
+        </script>
+</body>
+</html>

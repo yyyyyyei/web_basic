@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function</title>
+</head>
+<body>
+    <script>
+        // 함수(function): 유사한 동작을 하는 코드를 묶어 놓은 코드 집합
+        // 프로시저: 데이터를 기준으로 하여 특정 데이터 관련 프로세스를 일괄적 수행
+        // 일반적으로 반환값 없음.. 결과를 저장하는 개념이 아니ㅣㅁ
+        // 메서드: 클래스에 소속된 함수. 결과를 변수 등에 할당
+        // 이미 작성된 로직을 재활용 -> 함수
+
+        console.log(add(4,2));
+        // 함수 선언문
+        // 형태) function키워드 함수명(매개변수..) {}
+        function add(a, b) { // 함수 선언문 -> 호이스팅이 일어남
+        // 코딩이 된 앞부분의 줄에 add 함수를 써도 써짐
+        // 함수는 선언 순서가 자동으로 위로 올라감.
+            return a + b;
+        }
+        console.log(add(3, 4));
+
+        
+        // 함수 표현식으로 정의했을 경우엔 정의 후 뒤 코드에만 적용됨
+        // console.log(sub(3,4));
+        // 함수 표현식 (let, const ...)
+        // 키워드 함수명 = function(매개변수...)
+        const sub = function(a, b) {
+            return a - b;
+        }
+        console.log(sub(7,4));
+
+
+        // 클로저 (Closure)
+        // 상태를 유지하면서 접근제어
+        // JS -> private, public같은 접근제어자가 없음
+        // 변수를 은닉할 수 있는 수단이 없음.
+        {
+            // 범접할 수 없는 영역.
+        }
+
+        {} // 중괄호의 안과 밖은 '매개변수'/return으로만 소통을 함.
+
+        let counter = 0;
+        counter++; // 1씩만 늘리고 싶은데...
+        counter++;
+        console.log(counter);
+        counter = 10; // 임의의 개입. 막을 수가 없어요.
+        const counterObj = { counter: 0 };
+        counterObj.counter++;
+        counterObj.counter++;
+        console.log("counterObj.counter", counterObj.counter);
+        counterObj.counter = 10;
+        console.log("counterObj.counter", counterObj.counter);
+        // 객체나 변수에 대한 접근 자체를 막을 방법이 X
+        function makeCouter() {
+            let counter = 0; // makeCounter 함수 내부 변수.
+            return function () {
+            // counter 함수 -> c
+            counter++;
+            console.log(`호출 되었네요~ ${counter}`);
+            };
+        }
+        const c = makeCouter();
+        c();
+        c();
+        c();
+        c();
+        c();
+        // 변수를 은닉, 체계화 -> 클로져
+
+        
+    </script>
+</body>
+</html>

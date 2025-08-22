@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구조분해</title>
+</head>
+<body>
+    <script>
+        // 구조 분해 할당
+        // 객체나 배열 형태로 된 데이터 -> 분해가 되어서 위치나 키/프로퍼티 이름을 바탕으로 변수화
+
+        // 배열 구조 분해
+        const arr = [10, 20, 30, 40, 50];
+        // arr을 분해해서 그 위치에 따라서 할당을 받음
+        const [first, second] = arr;
+        // [0, 1]만 가져오니까 arr(2, 3 ..)는 없는 취급 됨
+        console.log(first, second);
+
+        const [a1, a2, a3, a4, a5] = arr;
+        // 역시나.. 넘치도록 a6까지 호출하면 그냥 undefined ^^..
+        console.log(a1, a3, a5);
+        // 가장 대표적인 구조 분해 (리액트 상태관리)
+        // const [message, setMessage] = useState("");
+
+        
+        // 객체 구조 분해
+        const obj = {x: 1, y: 2, z: 3};
+        // [] = 배열(위치로 인식), {} = 객체(이름으로 인식)
+        // 프로퍼티 name 또는 key로 불러와서 인식시킴
+        const {x, y, z} = obj;
+        console.log(z, x, y);
+
+        // 새로운 변수 이름 부여할 수도 있음
+        const {x: x2, y: y2, z: z2} = obj;
+        console.log(x2, y2, z2);
+
+
+        // 스프레드 연산자 
+        // 객체, 배열 -> 내부에 있는 데이터를 풀어헤쳐서 다른 객체, 배열 전달
+        const lst = [5, 10, 15];
+        // 새로운 배열에 옮겨버려!!
+        const lst2 = [];
+
+        // 가장 고전적인 방법: push
+        for (const a of lst) {
+            lst2.push(a); // while, forEach로도 가능
+        } // 근데 너무 낭비돼!!
+        console.log(lst2);
+
+        // ... -> 스프레드 연산자(?)
+        const lst3 = [...lst];
+        console.log(lst3);
+
+        // 기존꺼 복사 + 새로운 요소 추가도 가능
+        const lst4 = [...lst, 20, 25];
+        console.log(lst4);
+
+        // 깊은복사, 얕은 복사, 재할당은 무엇인가..
+        const ar = [1,2,3];
+        const ar2 = ar; // 재할당
+        // ar2에 ar의 주소값까지 전달됨
+        // ar2 수정하면 ar까지 수정됨ㅜㅜ
+        ar2[1] = 5;
+        console.log(ar);
+
+        const ar3 = [...ar]; // 복사
+        console.log(ar, ar3); // 아니 왜 안바껴
+        ar2[0] = 1000;
+        console.log(ar, ar3);
+        const ar4 = [ar, ar3];
+        const ar5 = [...ar4];
+        console.log(ar4, ar5);
+        ar3[0] = 555;
+        console.log(ar4, ar5);
+        const ar6 = [[...ar], [...ar3]]; // 깊은 복사
+        ar[0] = 999;
+        ar3[0] = 777;
+        console.log(ar6);
+        
+
+        // ?? ai에 설명 필요행.. 얕은복사
+
+        // 객체 스프레드 연산자
+        const origin = {a:"apple", b:"banana", c:"cherry"};
+        const ob = {};
+        for (const key in origin) {
+            ob[key] = origin[key];
+        }
+        console.log(ob);
+        // 동일한 키가 있으면 덮어씀! + 새로운 키-값 추가 가능!!
+        const ob2 = {...origin, d:"durian", e:"eggfruit", a:"ananconda"};
+        console.log(ob2);
+
+        // 나머지 파라미터
+        function myfun(a, ...b) {
+            // () 패러미터는 개별 패러미터고
+            // ... -> 얘네는 배열
+            console.log(a, b);
+        }
+
+        // 뒤에 있는 2~6이 배열이 되어서 한 묶음이 되어버림!!
+        myfun(1, 2, 3, 4, 5, 6);
+
+        // record DTO로 소통하는 것처럼!! 객체 하나를 메서드에 보내공..
+        function myfun2(props) {
+            const {name, age, job} = props;
+            console.log(name, age, job);
+        }
+
+        myfun2({name:"Hong", age:20, job:"student"});
+    </script>
+</body>
+</html>

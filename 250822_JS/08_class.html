@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class</title>
+</head>
+<body>
+    <script>
+        // JSON같은 스타일
+        // 중괄호를 통해서 객체를 생성할 수 있다
+        const obj = {};
+        // 이 내부에 있는 값을 수정
+        console.log(obj);
+        
+        // . 또는 대괄호[]를 통해서 값을 불러올 수 있다
+        // obj[key] = value
+        // obj.key = value
+        obj["name"] = "yejin";
+        obj.age = 100;
+        // 프로그래밍할 때 변수명, 함수명은
+        // 1) 숫자로 시작할 수 없음
+        // 2) _을 제외한 특수문자 사용 불가
+        // 3) 공백을 포함할 수 없음
+        obj["Hello world"] = "Bye world";
+        // obj.Hello world 는 불가..
+        console.log(obj);
+        console.log(obj.name);
+        console.log(obj["age"]);
+        // 없은걸 호출해도 에러 안 남.. undefined가 나올 뿐
+        console.log(obj["yeahh"]);
+
+        const obj2 = {
+            name: "seoungbin",
+            age: 24,
+            // function을 표현식으로 넣어버릴 수도 있음;;
+            hello: function () {
+                console.log("안녕");
+            }
+        }
+        obj2.hello();
+
+
+
+        // Class
+        class Person {}; // Person이라는 클래스 설계도가 됨
+        const person = new Person();
+        person.a = "a";
+        console.log(person);
+
+        class Dog {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+        const dog = new Dog("딸기", 10);
+        console.log(dog);
+
+        class Cat {
+            constructor(name, age) {
+                // _ -> 기능적으로는 막아주진 않는데, 접근해서 변경하지 말라는 의미
+                this._name = name;
+                this._age = age;
+            }
+
+            // getter, setter
+            get name() {
+                return this._name;
+            }
+
+            set name(newName) {
+                this._name = newName;
+            }
+
+            introduce() {
+                console.log(`${this._name}, ${this._age}`);
+            }
+        }
+
+        const cat = new Cat("나비", 3);
+        console.log(cat);
+        console.log(cat.name); // getter
+        cat.name = "애옹이"; // setter
+        cat.introduce();
+
+        class Programmer {
+            constructor(language) {
+                this.language = language;
+            }
+            coding() {
+                console.log(`${this.language} 코딩!!!`);
+            }
+        }
+
+        const p = new Programmer("java");
+        p.coding();
+
+        // @Overriding -> 따로 없음. 다만 super를 통해서 생성자나 이전 메서드, 멤버변수(프로퍼티)를 호출할 수 있음.
+        class CloudProgrammer extends Programmer {
+            constructor() {
+                super("AWS");  // 겹칠 경우 알아서 오버라이딩! 덮어씀
+                this.grade = "A+";
+            }
+        }
+        const cp = new CloudProgrammer("java");
+        console.log(cp);
+        cp.coding();
+    </script>
+</body>
+</html>

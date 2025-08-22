@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>high order function</title>
+</head>
+<body>
+    <script>
+        // 고차 함수. Stream
+        // map, filter, reduce ..
+        // 배열 고차함수 -> 배열 압축, 변환, 반복
+        // Java List 내부에서 자동 해결
+        const lst = [1,2,3,4,5];
+        console.log(lst);
+
+        // 2배로 일괄적으로 변환하고 시퍼요
+        function makeDouble(x) {
+            return x * 2;
+        }
+        // map 안에 함수 또는 arrow function 넣으면 됨
+        const doubled_lst = lst.map(makeDouble);
+        console.log(doubled_lst);
+        const doubled_lst2 = lst.map(x => x * 2);
+        console.log(doubled_lst2);
+
+        // filter, reduce, forEach
+        // filter: ture인 값만 모아서 남김
+        const even = lst.filter(x => x % 2 == 0); // ===도 되고 ==도 되는건가?
+        console.log(even);
+        // x % 2 가 0이라면 falsy한 값이자너.
+        const odd = lst.filter(x => x % 2);
+        console.log(odd);
+
+        // reduce((acc, cur) => 연산식, 초기값) // 누산기
+        // acc: accumulator
+        // cur: current value. 이번 차수의 값
+        const sum = lst.reduce((acc, cur) => acc + cur, 0);
+        console.log(sum);
+
+        // forEach
+        lst.forEach(x => console.log(x));
+    </script>
+</body>
+</html>
