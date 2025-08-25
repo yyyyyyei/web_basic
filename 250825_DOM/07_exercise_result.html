@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 실습</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #container { padding: 15px; border: 1px solid lightgray; border-radius: 5px; }
+        button { margin: 5px; padding: 8px 12px; cursor: pointer; }
+        input[type="text"] { padding: 8px; }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 id="main-title">실습 제목</h1>
+        <p id="description">실습 설명</p>
+
+        <form id="add-form">
+            <input type="text"
+                   id ="item-input"
+                   placeholder="추가할 내용 입력"
+                   required
+            />
+            <button type="submit">아이템 추가</button>
+        </form>
+
+        <ul id="item-list">
+            <li>아이템1</li>
+            <li>아이템2</li>
+        </ul>
+
+        <button id="change-btn">내용 및 스타일 변경</button>
+    </div>
+    <script>
+        const title = document.querySelector("#main-title");
+        const description = document.querySelector("#description");
+        const itemList = document.querySelector("#item-list");
+        const changeBtn = document.querySelector("#change-btn");
+        const addForm = document.querySelector("#add-form");
+        const itemInput = document.querySelector("#item-input");
+
+        changeBtn.addEventListener("click", () => {
+            title.textContent = "변경된 제목";
+            title.style.color = "blue";
+            description.innerHTML = "<strong>강력!!</strong>한 코딩을 하고 싶으신가요?";
+            itemList.style.backgrounColor = "light yellow";
+        });
+
+        addForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const newItemText = itemInput.value.trim();
+            if (newItemText) {
+                const newItem = document.createElement("li");
+                newItem.textContent = newItemText;
+                itemList.appendChild(newItem);
+                itemInput.value = "";
+                itemInput.focus();
+            }
+        })
+    </script>
+</body>
+</html>
