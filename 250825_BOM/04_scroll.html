@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Scroll Event 상세 실습</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.8; margin: 0; padding: 0; background-color: #f0f2f5; }
+        .long-content { height: 250vh; /* 페이지 전체 스크롤을 만들기 위한 긴 콘텐츠 */ padding: 20px; text-align: center; background: linear-gradient(to bottom, #ffffff, #e0eafc); }
+        .info-panel { position: fixed; top: 10px; left: 10px; background-color: rgba(0, 0, 0, 0.7); color: white; padding: 15px; border-radius: 8px; z-index: 1000; font-size: 16px; }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; padding: 15px 20px; background-color: crimson; color: white; border: none; border-radius: 50px; cursor: pointer; opacity: 0; /* 기본 숨김 */ visibility: hidden; /* 접근성 위해 추가 */ transition: opacity 0.3s, visibility 0.3s; z-index: 1000; }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        .element-scroll-container { max-width: 800px; margin: 40px auto; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .scrollable-box { height: 200px; overflow-y: scroll; /* 특정 요소에 스크롤 생성 */ border: 2px solid cornflowerblue; padding: 10px; background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <div class="info-panel">
+        <p><strong>Window Scroll (Y):</strong> <span id="window-scroll-y">0</span>px</p>
+        <p><strong>Box Scroll (Top):</strong> <span id="box-scroll-top">0</span>px</p>
+    </div>
+
+    <div class="long-content">
+        <h1>Scroll Event 실습 페이지</h1>
+        <p>페이지를 아래로 스크롤하여 변화를 확인하세요.</p>
+
+        <div class="element-scroll-container">
+            <h2>특정 요소 스크롤</h2>
+            <div class="scrollable-box" id="scroll-box">
+                이 상자는 자체적인 스크롤을 가지고 있습니다. <br> 스크롤을 내리면 왼쪽 상단 패널의 'Box Scroll' 값이 변경됩니다. <br><br>
+                내용...<br>내용...<br>내용...<br>내용...<br>내용...<br>내용...<br>내용...<br>내용...<br>내용...<br>내용...<br>내용...<br>
+                여기가 상자의 끝입니다.
+            </div>
+        </div>
+
+        <p>페이지 하단 콘텐츠</p>
+    </div>
+
+    <button class="back-to-top" id="top-btn">TOP</button>
+
+    <script>
+    /*
+    ==================================================================================
+    ## 1. 개념 설명: Scroll Event란?
+    ==================================================================================
+    'scroll' 이벤트는 사용자가 웹 페이지나 특정 요소의 **스크롤 바를 움직일 때마다 발생**하는 이벤트입니다.
+    이 이벤트를 활용하면 사용자의 스크롤 위치에 따라 다양한 인터랙션을 구현할 수 있습니다.
+    🎯 **이벤트 대상**:
+    1.  **`window` 객체**: 페이지 전체의 스크롤을 감지합니다. 가장 일반적인 사용 사례입니다.
+        - `window.addEventListener('scroll', ...)`
+    2.  **특정 HTML 요소**: `overflow: scroll` 또는 `overflow: auto` CSS 속성이 적용되어 자체 스크롤 바를 가진 요소의 스크롤을 감지합니다.
+        - `myElement.addEventListener('scroll', ...)`
+    🐢 **성능 문제 (Performance Consideration)**:
+    스크롤 이벤트는 사용자가 스크롤하는 동안 **매우 짧은 시간 안에 수십, 수백 번씩 연속으로 발생**할 수 있습니다.
+    만약 이벤트 핸들러 안에 복잡한 계산이나 무거운 DOM 조작 코드가 있다면, 브라우저에 큰 부담을 주어 페이지의 버벅임(Jank)이나 성능 저하를 유발할 수 있습니다.
+    
+    - **해결책**: 실제 프로젝트에서는 **쓰로틀링(Throttling)**이나 **디바운싱(Debouncing)** 같은 기법을 사용하여 이벤트 핸들러의 호출 빈도를 제어하는 것이 필수적입니다.
+      - **Throttling**: 이벤트를 일정 시간(예: 100ms)에 한 번만 실행되도록 조절합니다.
+      - **Debouncing**: 이벤트가 멈춘 후 일정 시간(예: 100ms)이 지나면 한 번만 실행되도록 합니다.
+    */
+
+    /*
+    ==================================================================================
+    ## 2. 주요 속성 및 메서드 설명
+    ==================================================================================
+    스크롤 위치를 읽고, 특정 위치로 스크롤을 이동시키는 다양한 속성과 메서드가 있습니다.
+    --- 📏 스크롤 위치 읽기 (Read Scroll Position) ---
+    - **`window.scrollY`**: **페이지 전체**가 수직으로 얼마나 스크롤되었는지를 픽셀(px) 단위로 반환합니다. 페이지 최상단은 `0`입니다. (`window.pageYOffset`은 오래된 이름이며, `scrollY`와 동일하게 작동합니다.)
+    - **`element.scrollTop`**: **특정 요소 내부**에서 내용이 수직으로 얼마나 스크롤되었는지를 픽셀 단위로 반환합니다. 요소의 스크롤 바가 최상단에 있으면 `0`입니다.
+    
+    (수평 스크롤의 경우 `window.scrollX`와 `element.scrollLeft`를 사용합니다.)
+    --- 🚀 스크롤 이동하기 (Programmatic Scrolling) ---
+    - **`window.scrollTo(x, y)`**: 페이지를 지정된 (x, y) 좌표로 즉시 이동시킵니다.
+    - **`window.scrollTo(options)`**: 옵션 객체를 사용하여 더 세밀하게 스크롤을 제어합니다. (권장 방식)
+        - **`top`**: 이동할 Y축 좌표 (수직 위치). `window.scrollY`와 관련됩니다.
+        - **`left`**: 이동할 X축 좌표 (수평 위치). `window.scrollX`와 관련됩니다.
+        - **`behavior`**: 스크롤 이동 방식을 지정합니다.
+            - `'smooth'`: 부드럽게 스크롤됩니다. (애니메이션 효과)
+            - `'instant'`: 즉시 이동합니다.
+            - `'auto'`: 기본값. 일반적으로 `'instant'`와 동일하게 동작합니다.
+    - **`element.scrollTop = value`**: 특정 요소의 스크롤 위치를 프로그래밍으로 설정하여 이동시킬 수 있습니다.
+    */
+
+    /*
+    ==================================================================================
+    ## 3. 실제 실습 (Interactive Example)
+    ==================================================================================
+    */
+
+    // --- 1. 실습에 필요한 HTML 요소들을 미리 찾아 변수에 할당합니다. ---
+    // 🧑‍💻 여기에 코드를 작성하세요.
+
+
+    // --- 2. `window` 객체에 스크롤 이벤트를 연결합니다. (페이지 전체 스크롤 감지) ---
+    // 🧑‍💻 여기에 코드를 작성하세요.
+
+
+    // --- 3. 특정 요소(`scrollBox`)에 스크롤 이벤트를 연결합니다. ---
+    // 🧑‍💻 여기에 코드를 작성하세요.
+
+
+    // --- 4. 'TOP' 버튼에 클릭 이벤트를 연결합니다. ---
+    // 🧑‍💻 여기에 코드를 작성하세요.
+
+    </script>
+</body>
+</html>
