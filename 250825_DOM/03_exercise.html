@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM 통합 실습</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #container { padding: 15px; border: 1px solid lightgray; border-radius: 5px; }
+        button { margin: 5px; padding: 8px 12px; cursor: pointer; }
+        input[type="text"] { padding: 8px; }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1 id="main-title">DOM 실습 페이지</h1>
+        <p id="description">버튼과 폼을 이용해 페이지를 동적으로 변경해보세요.</p>
+        
+        <form id="add-form">
+            <input type="text" id="item-input" placeholder="추가할 내용 입력" required>
+            <button type="submit">아이템 추가</button>
+        </form>
+        
+        <ul id="item-list">
+            <li>아이템 1</li>
+            <li>아이템 2</li>
+        </ul>
+        
+        <button id="change-btn">내용 및 스타일 변경</button>
+    </div>
+
+    <script>
+        // 1. 조작할 HTML 요소들을 미리 변수에 할당합니다.
+        const title = document.getElementById('main-title');
+        const description = document.getElementById('description');
+        const itemList = document.getElementById('item-list');
+        const changeBtn = document.getElementById('change-btn');
+        const addForm = document.getElementById('add-form');
+        const itemInput = document.getElementById('item-input');
+
+        // 2. '내용 변경' 버튼에 클릭 이벤트 리스너를 추가합니다.
+        changeBtn.addEventListener('click', () => {
+            title.textContent = '페이지가 변경되었습니다!';
+            title.style.color = 'darkorchid';
+
+            // 개발자가 작성한 안전한 HTML이므로 innerHTML 사용 가능
+            description.innerHTML = '버튼 클릭으로 <strong>내용과 스타일</strong>이 바뀌었습니다.';
+            description.style.backgroundColor = 'lavender';
+        });
+
+        // 3. 폼(Form)에 'submit' 이벤트 리스너를 추가합니다.
+        addForm.addEventListener('submit', (event) => {
+            // 3-1. 폼 제출 시 기본 동작(페이지 새로고침)을 막습니다.
+            event.preventDefault();
+
+            // 3-2. 입력된 텍스트 값을 가져옵니다.
+            const newItemText = itemInput.value.trim();
+            
+            // 3-3. 입력 값이 있을 때만 새 아이템을 생성하고 추가합니다.
+            if (newItemText) {
+                const newItem = document.createElement('li');
+
+                // 사용자 입력은 XSS 방지를 위해 반드시 textContent로 처리합니다.
+                newItem.textContent = newItemText;
+
+                itemList.appendChild(newItem);
+
+                // 3-4. 입력창을 초기화하고 다시 포커스를 줍니다.
+                itemInput.value = '';
+                itemInput.focus();
+            }
+        });
+    </script>
+
+</body>
+</html>

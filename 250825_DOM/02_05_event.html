@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>실습: 이벤트 처리 방식 비교</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .container { max-width: 600px; margin: 20px auto; padding: 25px; border: 1px solid #ccc; border-radius: 8px; }
+        button { padding: 10px 15px; margin: 5px; font-size: 16px; cursor: pointer; }
+        #log-box { margin-top: 20px; padding: 15px; border: 1px solid #ddd; background-color: #f8f8f8; height: 150px; overflow-y: auto; }
+        #log-box p { margin: 0 0 5px 0; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>이벤트 처리 방식 비교</h1>
+        <p>각 버튼을 클릭하여 아래 로그 박스에 출력되는 결과를 확인하세요.</p>
+        
+        <div>
+            <h3>1. on... 속성 방식</h3>
+            <button id="onclick-btn" onclick="firstOnclickHandler()">onclick 버튼</button>
+        </div>
+
+        <div>
+            <h3>2. addEventListener 방식</h3>
+            <button id="listener-btn">addEventListener 버튼</button>
+        </div>
+
+        <div id="log-box"></div>
+    </div>
+
+    <script>
+        /*
+        ==================================================================================
+        🎯 '이벤트(Event)'란 무엇인가?
+        ==================================================================================
+
+        이벤트란 '웹 브라우저에서 발생하는 특정 사건'을 의미합니다. 예를 들어,
+        - 사용자가 마우스를 클릭했을 때 ('click' 이벤트)
+        - 키보드를 눌렀을 때 ('keydown' 이벤트)
+        - 페이지 로딩이 완료되었을 때 ('load' 이벤트)
+        
+        [이벤트 처리의 3가지 핵심 요소]
+        1. 이벤트 타겟 (Event Target): 이벤트가 발생한 HTML 요소 (예: 클릭된 버튼)
+        2. 이벤트 타입 (Event Type): 발생한 이벤트의 종류 (예: 'click')
+        3. 이벤트 핸들러/리스너 (Event Handler/Listener): 이벤트가 발생했을 때 실행되도록 '등록된 함수'
+        */
+
+        // 결과 출력을 위한 로그 박스 요소와 헬퍼 함수 (수정하지 마세요)
+        const logBox = document.getElementById('log-box');
+        const log = (message) => {
+            logBox.innerHTML += `<p>${message}</p>`;
+            logBox.scrollTop = logBox.scrollHeight;
+        };
+
+        // --- 1. 'on...' 속성 방식 (구식, 권장하지 않음) ---
+        
+        // 요구사항 1-1: id가 'onclick-btn'인 요소를 선택하여 'onclickBtn' 변수에 저장하세요.
+        // 🧑‍💻 여기에 코드를 작성하세요.
+        
+
+        // 방법 1-1: HTML 태그의 'onclick' 속성에 의해 호출될 함수입니다.
+        function firstOnclickHandler() {
+            // 요구사항 1-2: log() 함수를 사용하여 "1. HTML의 onclick 속성으로 등록된 핸들러 실행!" 메시지를 출력하세요.
+            // 🧑‍💻 여기에 코드를 작성하세요.
+            
+        }
+
+        // 방법 1-2: JavaScript에서 요소의 프로퍼티로 핸들러를 할당합니다.
+        // 요구사항 1-3: 'onclickBtn' 요소의 'onclick' 프로퍼티에 새로운 함수를 할당하여
+        //             "2. 최종적으로 할당된 핸들러 실행! (이전 핸들러는 덮어씌워짐)" 메시지를 출력하세요.
+        //             버튼 클릭 시 이 메시지만 출력되는 것을 확인하여 덮어쓰기 특징을 이해하세요.
+        // 🧑‍💻 여기에 코드를 작성하세요.
+        
+
+        /*
+        [on... 속성 방식의 문제점]
+        - 하나의 이벤트에 하나의 함수만 연결할 수 있습니다. (새로운 함수를 할당하면 이전 함수가 덮어씌워짐)
+        - HTML과 JavaScript 코드가 섞여 '관심사 분리' 원칙에 위배되고, 유지보수가 어렵습니다.
+        */
+
+
+        // --- 2. 'addEventListener' 방식 (현대적 표준, 적극 권장) ---
+
+        // 요구사항 2-1: id가 'listener-btn'인 요소를 선택하여 'listenerBtn' 변수에 저장하세요.
+        // 🧑‍💻 여기에 코드를 작성하세요.
+        
+        
+        /*
+        [addEventListener의 장점]
+        - '관심사 분리': HTML은 구조만 담당하고, JavaScript가 동작을 모두 제어하여 코드가 깔끔해집니다.
+        - '다중 핸들러 등록': 하나의 이벤트에 여러 개의 핸들러를 '추가'할 수 있습니다. (덮어쓰지 않음)
+        - '세밀한 제어': 이벤트 캡처링/버블링 등 고급 이벤트 흐름 제어가 가능합니다.
+        */
+
+        // 요구사항 2-2: 'listenerBtn'에 'click' 이벤트가 발생하면
+        //             "A. addEventListener로 등록된 첫 번째 핸들러 실행!" 메시지를 출력하는 핸들러를 추가하세요.
+        // 🧑‍💻 여기에 코드를 작성하세요.
+        
+
+        // 요구사항 2-3: 'listenerBtn'에 'click' 이벤트 핸들러를 '하나 더' 추가하여
+        //             "B. addEventListener로 '추가' 등록된 두 번째 핸들러 실행!" 메시지를 출력하세요.
+        //             버튼 클릭 시 A와 B 메시지가 모두 출력되는 것을 확인하여 다중 등록 특징을 이해하세요.
+        // 🧑‍💻 여기에 코드를 작성하세요.
+        
+    </script>
+
+</body>
+</html>
