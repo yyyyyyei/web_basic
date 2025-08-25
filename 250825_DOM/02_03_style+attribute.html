@@ -41,13 +41,16 @@
         // 요구사항: id를 이용하여 p, a, img, button 태그를 각각 선택하고 변수에 저장하세요.
         // (변수명 예: textElement, linkElement, imageElement, changeButton)
         // 🧑‍💻 여기에 코드를 작성하세요.
-
+        const textElement = document.querySelector("#text");
+        const linkElement = document.querySelector("#link");
+        const imageElement = document.querySelector("#image");
+        const changeButton = document.querySelector("#change-btn");
 
 
         // --- 2. 버튼 클릭 이벤트 설정 ---
         // '변경하기' 버튼이 클릭되었을 때, 아래 함수 안의 코드들이 실행됩니다.
         changeButton.addEventListener('click', () => {
-
+            alert("button clicked!!!");
             /*
             ----------------------------------------------------------------------------------
             💡 Part 1: .style 프로퍼티로 CSS 스타일 변경하기
@@ -61,7 +64,11 @@
             */
             // 요구사항: 위에서 선택한 p 요소(textElement)의 글자색, 배경색, 글자 크기, 테두리 반경, 글자 두께를 변경하세요.
             // 🧑‍💻 여기에 코드를 작성하세요.
-            
+
+            // button 누르면 바뀜
+            textElement.style.color = "red"; 
+            textElement.style.backgroundColor = "blue";
+            textElement.style.fontSize = "30px";
 
 
             /*
@@ -75,16 +82,24 @@
             // 요구사항 1: a 요소(linkElement)의 'href' 속성을 'https://www.google.com'으로 변경하고,
             //            textContent도 '구글로 이동'으로 변경하세요.
             // 🧑‍💻 여기에 코드를 작성하세요.
+            linkElement.setAttribute("href", "https://www.google.com");
+            linkElement.textContent = "구글로 이동";
             
 
             // 요구사항 2: img 요소(imageElement)의 'src' 속성을 'https://via.placeholder.com/200x100?text=After'로 변경하고,
             //            'alt' 속성도 '변경 후 이미지'로 수정하세요.
             // 🧑‍💻 여기에 코드를 작성하세요.
-            
+            imageElement.setAttribute("src", "https://cdn.pixabay.com/photo/2025/01/07/21/44/cats-9317796_1280.jpg");
+            // 이미지가 안 뜰 때의 대체 텍스트
+            imageElement.setAttribute("alt", "변경 후 이미지");
+
+
 
             // 요구사항 3: button 요소(changeButton)에 'disabled' 속성을 'true'로 설정하여 비활성화하고,
             //            textContent를 '변경 완료!'로 변경하세요.
             // 🧑‍💻 여기에 코드를 작성하세요.
+            changeButton.setAttribute("disabled", "true");
+            changeButton.textContent = "변경 완료!";
             
         });
 
