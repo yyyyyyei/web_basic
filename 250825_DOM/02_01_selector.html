@@ -38,21 +38,35 @@
         // 문서에서 'title'이라는 고유한 ID를 가진 요소를 찾습니다.
         // 가장 빠르고 명확한 단일 요소 선택 방법입니다.
         // 🧑‍💻 여기에 코드를 작성하세요.
+        // document.write("hi~~"); // 등장하는 지점에서 추가적인 html 등의 내용을 작성
+
+        console.log(document.getElementById("main-container"));
+        const titleElement = document.getElementById("title");
+        console.log(titleElement)
+        console.log(titleElement.textContent);
         
 
 
         // --- 2. querySelector: CSS 선택자로 첫 번째 요소 선택하기 ---
         // '.content'라는 클래스를 가진 요소 중 '첫 번째' 요소를 찾습니다.
         // CSS 선택자를 그대로 사용할 수 있어 매우 유연합니다.
+        // 이게 더 모던한 방식
         // 🧑‍💻 여기에 코드를 작성하세요.
-        
+        console.log(document.querySelector(".content"));
+        // # - id, . - class, 태그명, 선택자들 활용
+        const firstContentElement = document.querySelector(".content");
+        console.log(firstContentElement);
+        console.log(firstContentElement.textContent); // get, set... 접근자
 
 
         // --- 3. querySelectorAll: CSS 선택자로 모든 요소 선택하기 ---
         // '.content'라는 클래스를 가진 '모든' 요소를 찾습니다.
         // 반환되는 값은 단일 요소가 아닌, 요소들이 담긴 'NodeList' (유사 배열)입니다.
         // 🧑‍💻 여기에 코드를 작성하세요.
-        
+        console.log(document.querySelectorAll(".content"));
+        const AllContentElement = document.querySelectorAll(".content");
+        console.log(AllContentElement);
+        console.log(AllContentElement[1].textContent);
 
         
         /*
