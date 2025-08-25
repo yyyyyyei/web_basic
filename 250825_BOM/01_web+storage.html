@@ -105,34 +105,114 @@
 
     // --- 1. 실습에 필요한 HTML 요소들을 미리 찾아 변수에 할당합니다. ---
     // 🧑‍💻 여기에 코드를 작성하세요. (결과 표시 영역, 각 input과 button 요소들을 변수에 할당)
+    // 결과 표시 영역
+    const resultDiv = document.querySelector("#result");
+    // <p id="result"> 동작 결과가 표시됨
+    
+    
+    // localStorage 관련 요소
+    const localKeyInput = document.getElementById('local-key');
+    const localValueInput = document.getElementById('local-value');
+    const localSetBtn = document.getElementById('local-set');
+    const localGetBtn = document.getElementById('local-get');
+    const localRemoveBtn = document.getElementById('local-remove');
+    const localClearBtn = document.getElementById('local-clear');
+
+    // sessionStorage 관련 요소
+    const sessionKeyInput = document.getElementById('session-key');
+    const sessionValueInput = document.getElementById('session-value');
+    const sessionSetBtn = document.getElementById('session-set');
+    const sessionGetBtn = document.getElementById('session-get');
+    const sessionRemoveBtn = document.getElementById('session-remove');
+    const sessionClearBtn = document.getElementById('session-clear');
 
 
     // --- 2. 각 버튼에 클릭 이벤트 리스너를 연결하여 기능을 구현합니다. ---
 
     // [localStorage] 저장 버튼
     // 🧑‍💻 여기에 코드를 작성하세요. (localSetBtn에 'click' 이벤트 리스너 추가)
-
+    localSetBtn.addEventListener("click", () => {
+        const key = localKeyInput.value;
+        const value = localValueInput.value;
+        if (!key || !value) {
+            resultDiv.textContent = "localstorage 키와 값 모두 입력 필요";
+        }
+        localStorage.setItem(key, value);
+        resultDiv.textContent = `local ${key}: ${value}`;
+    });
+    
     // [localStorage] 읽기 버튼
     // 🧑‍💻 여기에 코드를 작성하세요. (localGetBtn에 'click' 이벤트 리스너 추가)
-
+    localGetBtn.addEventListener("click", () => {
+        const key = localKeyInput.value;
+        if (!key) {
+            resultDiv.textContent = "local 조회할 키 입력 필요";
+        }
+        const value = localStorage.getItem(key);
+        resultDiv.textContent = value ? `local ${key}: ${value}` : `해당 키(${key})에 저장된 데이터가 없습니다`;
+    });
+    
     // [localStorage] 삭제 버튼
     // 🧑‍💻 여기에 코드를 작성하세요. (localRemoveBtn에 'click' 이벤트 리스너 추가)
-
+    localRemoveBtn.addEventListener("click", () => {
+        const key = localKeyInput.value;
+        if (!key) {
+            resultDiv.textContent = "local 삭제할 키 입력 필요";
+        }
+        const value = localStorage.removeItem(key);
+        resultDiv.textContent = `local ${key} 삭제 완료`;
+    });
+    
     // [localStorage] 전체 삭제 버튼
     // 🧑‍💻 여기에 코드를 작성하세요. (localClearBtn에 'click' 이벤트 리스너 추가)
+    localClearBtn.addEventListener("click", () => {
+        localStorage.clear();
+        resultDiv.textContent = "local 전체 삭제 완료";
+    });
 
 
     // [sessionStorage] 저장 버튼
     // 🧑‍💻 여기에 코드를 작성하세요. (sessionSetBtn에 'click' 이벤트 리스너 추가)
+    sessionSetBtn.addEventListener("click", () => {
+        const key = sessionKeyInput.value;
+        const value = sessionValueInput.value;
+        if(!key || !value) {
+            resultDiv.textContent = "session 키와 값 모두 입력 필요";
+            return;
+        }
+        sessionStorage.setItem(key, value);
+        resultDiv.textContent = `session ${key}: ${value}`;
+    });
 
     // [sessionStorage] 읽기 버튼
     // 🧑‍💻 여기에 코드를 작성하세요. (sessionGetBtn에 'click' 이벤트 리스너 추가)
+    sessionGetBtn.addEventListener("click", () => {
+        const key = sessionKeyInput.value;
+        if (!key) {
+            resultDiv.textContent = "session 조회할 키 입력 필요";
+        }
+        const value = sessionStorage.getItem(key);
+        resultDiv.textContent = value ? `session ${key}: ${value}` : `해당 키(${key})에 저장된 데이터가 없습니다`;
+    });
 
     // [sessionStorage] 삭제 버튼
     // 🧑‍💻 여기에 코드를 작성하세요. (sessionRemoveBtn에 'click' 이벤트 리스너 추가)
+    sessionRemoveBtn.addEventListener("click", () => {
+        const key = sessionKeyInput.value;
+        if (!key) {
+            resultDiv.textContent = "session 삭제할 키 입력 필요";
+        }
+        const value = sessionStorage.removeItem(key);
+        resultDiv.textContent = `session ${key} 삭제 완료`;
+    });
+
 
     // [sessionStorage] 전체 삭제 버튼
     // 🧑‍💻 여기에 코드를 작성하세요. (sessionClearBtn에 'click' 이벤트 리스너 추가)
+    sessionClearBtn.addEventListener("click", () => {
+        sessionStorage.clear();
+        resultDiv.textContent = "session 전체 삭제 완료";
+    });
 
     </script>
 </body>
